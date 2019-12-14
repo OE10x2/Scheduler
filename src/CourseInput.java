@@ -3,10 +3,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Input {
+public class CourseInput {
 	
 	//public variables
 	public ArrayList<String> CourseList = new ArrayList<String>();
+	public int courseSize;
 	
 	/*public static void main(String[] args) {
 		ReadInput("Courses.csv");
@@ -27,6 +28,7 @@ public class Input {
 				String line = scan.nextLine();
 				//String[] fields = line.split(",");
 				CourseList.add(line);
+				courseSize++;
 			}
 			
 			
@@ -38,5 +40,8 @@ public class Input {
 			System.out.println("File Not Found");
 			e.printStackTrace();
 		}
+	}
+	public int getcourseSize() {
+		return courseSize;
 	}
 }

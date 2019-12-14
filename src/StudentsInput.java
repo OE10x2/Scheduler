@@ -27,9 +27,9 @@ public class StudentsInput {
 				String line = scan.nextLine();
 				String[] fields = line.split(" ");
 				//System.out.println(fields.length);
-				String[] arr1 = Arrays.copyOfRange(fields,0,3);
-				String[] arr2 = Arrays.copyOfRange(fields, 3, 11);
-				String[] arr3 = Arrays.copyOfRange(fields, 11, 14);
+				String[] arr1 = Arrays.copyOfRange(fields,0,3); // full name, grade
+				String[] arr2 = Arrays.copyOfRange(fields, 3, 11); // 8 choices
+				String[] arr3 = Arrays.copyOfRange(fields, 11, 14); // 3 alternate
 				
 				Student S = new Student(arr1[0],arr1[1],arr1[2],arr2,arr3);
 				
