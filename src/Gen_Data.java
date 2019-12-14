@@ -27,22 +27,51 @@ public class Gen_Data{
         for (String i: students){
             int grade = (int)(Math.random() * 4 + 9);
             System.out.print(i + " " + grade + " ");
-            HashSet<Integer> s = new HashSet<>();
+            HashSet<String> s = new HashSet<>();
+            HashSet<Integer> real = new HashSet<>();
             if (grade == 9){
-                while (!(s.size() == 11)) s.add(new Random().nextInt(course9.size()));
-                for (int ij: s) System.out.print(course9.get(ij) + " ");
+                while (!(s.size() == 11)){
+                    int temp = new Random().nextInt(course9.size());
+                    String firstThree = course9.get(temp).substring(0, 3);
+                    if (!s.contains(firstThree)){
+                        s.add(firstThree);
+                        real.add(temp);
+                    }
+                }
+                for (int ij: real) System.out.print(course9.get(ij) + " ");
                 nine++;
             }else if (grade == 10){
-                while (!(s.size() == 11)) s.add(new Random().nextInt(course10.size()));
-                for (int ij: s) System.out.print(course10.get(ij) + " ");
+                while (!(s.size() == 11)){
+                    int temp = new Random().nextInt(course10.size());
+                    String firstThree = course10.get(temp).substring(0, 3);
+                    if (!s.contains(firstThree)){
+                        s.add(firstThree);
+                        real.add(temp);
+                    }
+                }
+                for (int ij: real) System.out.print(course10.get(ij) + " ");
                 ten++;
             }else if (grade == 11){
-                while (!(s.size() == 11)) s.add(new Random().nextInt(course11.size()));
-                for (int ij: s) System.out.print(course11.get(ij) + " ");
+                while (!(s.size() == 11)){
+                    int temp = new Random().nextInt(course11.size());
+                    String firstThree = course11.get(temp).substring(0, 3);
+                    if (!s.contains(firstThree)){
+                        s.add(firstThree);
+                        real.add(temp);
+                    }
+                }
+                for (int ij: real) System.out.print(course11.get(ij) + " ");
                 eleven++;
             }else{
-                while (!(s.size() == 11)) s.add(new Random().nextInt(course12.size()));
-                for (int ij: s) System.out.print(course12.get(ij) + " ");
+                while (!(s.size() == 11)){
+                    int temp = new Random().nextInt(course12.size());
+                    String firstThree = course12.get(temp).substring(0, 3);
+                    if (!s.contains(firstThree)){
+                        s.add(firstThree);
+                        real.add(temp);
+                    }
+                }
+                for (int ij: real) System.out.print(course12.get(ij) + " ");
                 twelve++;
             }
             System.out.println();

@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class Algorithm_Distribution {
 	
-	HashMap<Course, ArrayList<Student>> finalList = new ArrayList(); // list of courses with all students in it
+	//HashMap<Course, ArrayList<Student>> finalList = new ArrayList(); // list of courses with all students in it
 	
 	public void distributeStudents()
 	{
 		
 	}
 	
-	public 
+	//public
 }
 /*
  * find the amount of people who chose each course, based on that make a
