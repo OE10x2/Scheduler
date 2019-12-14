@@ -1,4 +1,4 @@
-public class Algorithm2{
+public class Part2{
     //Input: HashMap of ArrayList of Students
     //Output: Sections
     public static void main(String[] args){

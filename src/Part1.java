@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 public class Part1 {
 	
-	public static HashMap<String, ArrayList<Student>> list = new HashMap<String, ArrayList<Student>>();
-	public static void adjList() {
+	public HashMap<String, ArrayList<Student>> list = new HashMap<String, ArrayList<Student>>();
+	public void adjList() {
 		CourseInput c = new CourseInput();
 		StudentsInput s = new StudentsInput();
 		c.ReadInput("Courses.csv");
