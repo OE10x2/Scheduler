@@ -15,4 +15,15 @@ public class Student {
 		this.choicesMain = choicesMain;
 		this.choicesAlt = choicesAlt;
 	}
+	
+	public String[] getchoiceMain() {
+		
+		return choicesMain;
+	}
+	
+	public String[] getchoiceAlt() {
+		
+		return choicesAlt;
+	}
+	
 }
