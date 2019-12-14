@@ -38,7 +38,10 @@ public class Gen_Data{
                         real.add(temp);
                     }
                 }
-                for (int ij: real) System.out.print(course9.get(ij) + " ");
+                ArrayList<Integer> actual = new ArrayList<>();
+                for (int ij: real) actual.add(ij);
+                Collections.shuffle(actual);
+                for (int ij: actual) System.out.print(course9.get(ij) + " ");
                 nine++;
             }else if (grade == 10){
                 while (!(s.size() == 11)){
@@ -49,7 +52,10 @@ public class Gen_Data{
                         real.add(temp);
                     }
                 }
-                for (int ij: real) System.out.print(course10.get(ij) + " ");
+                ArrayList<Integer> actual = new ArrayList<>();
+                for (int ij: real) actual.add(ij);
+                Collections.shuffle(actual);
+                for (int ij: actual) System.out.print(course10.get(ij) + " ");
                 ten++;
             }else if (grade == 11){
                 while (!(s.size() == 11)){
@@ -60,7 +66,10 @@ public class Gen_Data{
                         real.add(temp);
                     }
                 }
-                for (int ij: real) System.out.print(course11.get(ij) + " ");
+                ArrayList<Integer> actual = new ArrayList<>();
+                for (int ij: real) actual.add(ij);
+                Collections.shuffle(actual);
+                for (int ij: actual) System.out.print(course11.get(ij) + " ");
                 eleven++;
             }else{
                 while (!(s.size() == 11)){
@@ -71,7 +80,10 @@ public class Gen_Data{
                         real.add(temp);
                     }
                 }
-                for (int ij: real) System.out.print(course12.get(ij) + " ");
+                ArrayList<Integer> actual = new ArrayList<>();
+                for (int ij: real) actual.add(ij);
+                Collections.shuffle(actual);
+                for (int ij: actual) System.out.print(course12.get(ij) + " ");
                 twelve++;
             }
             System.out.println();
