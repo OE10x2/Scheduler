@@ -86,8 +86,10 @@ public class Display extends Application{
 
                 VBox semester1 = new VBox();
                 VBox semester2 = new VBox();
+                VBox labels = new VBox();
                 semester1.setAlignment(Pos.CENTER);
                 semester2.setAlignment(Pos.CENTER);
+                labels.setAlignment(Pos.CENTER);
                 Text sem1Title = new Text("Semester 1");
                 Text sem2Title = new Text("Semester 2");
                 Text course1 = new Text(student.C[0].equals("null") ? "Spare" : student.C[0]);
@@ -99,20 +101,15 @@ public class Display extends Application{
                 Text course7 = new Text(student.C[6].equals("null") ? "Spare" : student.C[6]);
                 Text course8 = new Text(student.C[7].equals("null") ? "Spare" : student.C[7]);
 
+                Text blank = new Text("");
+                Text period1 = new Text("Period 1");
+                Text period2 = new Text("Period 2");
+                Text period3 = new Text("Period 3");
+                Text period4 = new Text("Period 4");
+
+                labels.getChildren().addAll(blank, period1, period2, period3, period4);
                 semester1.getChildren().addAll(sem1Title,course1, course2, course3, course4);
                 semester2.getChildren().addAll(sem2Title,course5, course6, course7, course8);
-
-                sem1Title.getStyleClass().add("course");
-                sem2Title.getStyleClass().add("course");
-
-                course1.getStyleClass().add("course");
-                course2.getStyleClass().add("course");
-                course3.getStyleClass().add("course");
-                course4.getStyleClass().add("course");
-                course5.getStyleClass().add("course");
-                course6.getStyleClass().add("course");
-                course7.getStyleClass().add("course");
-                course8.getStyleClass().add("course");
 
 
                 HBox courseContainer = new HBox();
@@ -120,7 +117,7 @@ public class Display extends Application{
                 courseContainer.setId("courses_container");
 
                 courseContainer.setAlignment(Pos.CENTER);
-                courseContainer.getChildren().addAll(semester1, semester2);
+                courseContainer.getChildren().addAll(labels, semester1, semester2);
 
 
                 Button goBack = new Button("Return");

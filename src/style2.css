@@ -1,3 +1,6 @@
+.root{
+    -fx-font-size: 40px;
+}
 .details_header{
     -fx-font-size: 50px;
 }
@@ -19,9 +22,6 @@
 }
 
 #name{
-    -fx-font-size: 60px;
-}
-#wrapper{
-    -fx-border-color: red;
-
+    -fx-font-size: 70px;
+    -fx-font-family: Georgia;
 }
