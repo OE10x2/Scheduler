@@ -3,6 +3,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -36,14 +37,22 @@ public class Display extends Application{
             students.add(current);
         }
         for (Final student: students){
+            /*
             if (student.FN.equalsIgnoreCase("Divine")){
                 Text name = new Text(student.FN + " " + student.LN);
-                name.getStyleClass().add("text");
-                profile.getChildren().add(name);
+                Text grade = new Text(Integer.toString(student.G));
+                profile.getChildren().addAll(name, grade);
             }
+             */
         }
+        Text hoang = new Text("Hoang is cool");
+        profile.getChildren().add(hoang);
+        Rectangle rect = new Rectangle(300, 200);
+        rect.getStyleClass().add("style1.css");
+        pane.setCenter(rect);
 
         pane.setTop(profile);
+        profile.getStylesheets().add("style1.css");
         root.getChildren().add(pane);
 
         stage.setFullScreen(true);

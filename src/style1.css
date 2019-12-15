@@ -1,3 +1,13 @@
-.text{
-    -fx-font-size: 100px;
+.root{
+    -fx-spacing: 30;
+    -fx-font-size: 100;
+}
+HBox{
+    -fx-spacing: 7;
+    -fx-alignment: center;
+    -fx-background-color: pink;
+}
+Rectangle{
+    -fx-fill: blue;
+    -fx-border-color: orange;
 }
