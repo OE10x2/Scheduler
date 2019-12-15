@@ -29,6 +29,8 @@ public class Display extends Application{
 
     @Override
     public void start(Stage stage) throws Exception{
+        scene.getStylesheets().add("style1.css");
+        oneScene.getStylesheets().add("style2.css");
         Scanner read = new Scanner(new File("results.csv"));
         while (read.hasNextLine()){
             String[] line = read.nextLine().split(" ");
@@ -43,22 +45,18 @@ public class Display extends Application{
             Final student = students.get(i);
             Group temp = new Group();
             Text FNS = new Text(student.FN);
-            FNS.setFont(new Font("Arial", 40));
             FNS.setTranslateX(280);
             Text LNS = new Text(student.LN);
             LNS.setTranslateX(580);
-            LNS.setFont(new Font("Arial", 40));
             Text GS = new Text(Integer.toString(student.G));
             GS.setTranslateX(880);
-            GS.setFont(new Font("Arial", 40));
             Button details = new Button("Details");
-            details.setFont(new Font("Arial", 40));
             details.setTranslateX(1000);
             details.setTranslateY(-50);
             details.setOnAction(e -> {
                 oneRoot.getChildren().clear();
                 Text FNT = new Text(student.FN);
-                FNT.setFont(new Font("Arial", 50));
+                FNT.getStyleClass().add("details_header");
                 FNT.setTranslateX(100);
                 FNT.setTranslateY(50);
                 oneRoot.getChildren().add(FNT);
@@ -66,9 +64,9 @@ public class Display extends Application{
                 stage.setMaximized(true);
 
                 Button goBack = new Button("Return");
+                goBack.setId("return_button");
                 goBack.setTranslateX(500);
                 goBack.setTranslateY(400);
-                goBack.setFont(new Font("Arial", 100));
                 goBack.setOnAction(ef -> {
                     stage.setScene(scene);
                     stage.setMaximized(true);

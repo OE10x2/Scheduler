@@ -1,13 +1,4 @@
 .root{
-    -fx-spacing: 30;
-    -fx-font-size: 100;
-}
-HBox{
-    -fx-spacing: 7;
-    -fx-alignment: center;
-    -fx-background-color: pink;
-}
-Rectangle{
-    -fx-fill: blue;
-    -fx-border-color: orange;
+    -fx-font-size: 40px;
+    -fx-font-family: "Segoe UI";
 }
