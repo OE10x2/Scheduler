@@ -1,8 +1,13 @@
 .root{
-    -fx-font-size: 40px;
+    -fx-font-size: 20px;
     -fx-font-family: "Segoe UI";
 }
 
 #search_wrapper{
     -fx-font-size: 30px;
+}
+
+#title{
+    -fx-font-size: 100px;
+    -fx-font-family: Georgia;
 }

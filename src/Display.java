@@ -34,7 +34,7 @@ public class Display extends Application{
 
     public ArrayList<Final> filterByLastName(String lastname){
         lastname = lastname.toLowerCase();
-        ArrayList<Final> filtered= new ArrayList<Final>();
+        ArrayList<Final> filtered= new ArrayList<>();
         for (Final student: students){
             String LN = student.LN.toLowerCase();
             if (LN.length() < lastname.length()){
@@ -47,15 +47,9 @@ public class Display extends Application{
                     break;
                 }
             }
-            if (check){
+            if (check) {
                 filtered.add(student);
             }
-            /*
-            if (student.FN.toLowerCase().equals(lastname.toLowerCase())){
-                System.out.println(student.FN);
-                filtered.add(student);
-            }
-            */
 
         }
         return filtered;
@@ -64,8 +58,7 @@ public class Display extends Application{
     public ObservableList<Group> renderStudents(ArrayList<Final> students, Stage stage){
         ObservableList<Group> lol = FXCollections.observableArrayList();
         root.getChildren().clear();
-        for (int i = 0; i < students.size(); i++){
-            Final student = students.get(i);
+        for (Final student:students){
             Group temp = new Group();
             Text FNS = new Text(student.FN);
             FNS.setTranslateX(280);
@@ -74,8 +67,8 @@ public class Display extends Application{
             Text GS = new Text(Integer.toString(student.G));
             GS.setTranslateX(880);
             Button details = new Button("Details");
-            details.setTranslateX(1000);
-            details.setTranslateY(-50);
+            details.setTranslateX(1150);
+            details.setTranslateY(-25);
             details.setOnAction(e -> {
                 oneRoot.getChildren().clear();
                 stage.setScene(oneScene);
@@ -92,8 +85,7 @@ public class Display extends Application{
                 Text FNT = new Text(student.FN+ " " +student.LN);
                 FNT.setId("name");
                 FNT.getStyleClass().add("details_header");
-                //FNT.setTranslateX(480);
-                //FNT.setTranslateY(100);
+
 
                 wrapper.getChildren().add(FNT);
 
@@ -131,16 +123,14 @@ public class Display extends Application{
                 HBox courseContainer = new HBox();
                 courseContainer.setSpacing(100);
                 courseContainer.setId("courses_container");
-                //courseContainer.setTranslateX(400);
-                //courseContainer.setTranslateY(200);
+
                 courseContainer.setAlignment(Pos.CENTER);
                 courseContainer.getChildren().addAll(semester1, semester2);
 
 
                 Button goBack = new Button("Return");
                 goBack.setId("return_button");
-                //goBack.setTranslateX(530);
-                //goBack.setTranslateY(500);
+
                 goBack.setOnAction(ef -> {
                     stage.setScene(scene);
                     stage.setMaximized(true);
@@ -173,10 +163,17 @@ public class Display extends Application{
         /*
            Area to search for each student
          */
+        Text title = new Text("Scheduly");
+        title.setId("title");
+
         Text searchHeader = new Text("Search by last name:");
         TextField search = new TextField();
         search.setMaxWidth(scene.getWidth()/2);
         Button searchButton = new Button("Search");
+
+        HBox searchBox = new HBox();
+        searchBox.setAlignment(Pos.CENTER);
+        searchBox.getChildren().addAll(search, searchButton);
 
 
         //Wrapper
@@ -184,16 +181,16 @@ public class Display extends Application{
         searchWrapper.setId("search_wrapper");
         searchWrapper.setPrefWidth(scene.getWidth());
         searchWrapper.setAlignment(Pos.CENTER);
-        searchWrapper.getChildren().addAll(searchHeader, search, searchButton);
+        searchWrapper.getChildren().addAll(title, searchHeader, searchBox);
         searchWrapper.setSpacing(10);
         /*
             ListView for the list of students
          */
         ListView LV = new ListView(LOL);
         LV.setPrefWidth(1000);
-        LV.setMaxHeight(500);
+        LV.setMaxHeight(300);
         LV.setTranslateX(183);
-        LV.setTranslateY(200);
+        LV.setTranslateY(300);
         root.getChildren().addAll(searchWrapper, LV);
 
         /*
@@ -210,9 +207,9 @@ public class Display extends Application{
 
             ListView tempLV = new ListView(TEMPP);
             tempLV.setPrefWidth(1000);
-            tempLV.setMaxHeight(500);
+            tempLV.setMaxHeight(300);
             tempLV.setTranslateX(183);
-            tempLV.setTranslateY(200);
+            tempLV.setTranslateY(300);
             root.getChildren().addAll(searchWrapper, tempLV);
 
 
