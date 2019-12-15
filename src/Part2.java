@@ -31,7 +31,7 @@ public class Part2{
             System.out.println(s + " " + number.get(s));
             //Each class is either 1, 2, or 3 sections
             if (number.get(s) <= 32) sections.put(s, 1);
-            else if (number.get(s) / 2 <= 32 && number.get(s) / 3 > 32) sections.put(s, 2);
+            else if (number.get(s) / 2 <= 32 && number.get(s) / 3 < 25) sections.put(s, 2);
             else sections.put(s, 3);
         }
     }
