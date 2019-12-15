@@ -1,24 +1,92 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Part2{
     //Input: HashMap of ArrayList of Students
     //Output: Sections
-    ArrayList<String> course9 = new ArrayList<>();
-    ArrayList<String> course10 = new ArrayList<>();
-    ArrayList<String> course11 = new ArrayList<>();
-    ArrayList<String> course12 = new ArrayList<>();
-    HashMap<String, Integer> map = new HashMap<>();
+    ArrayList<Student> students = new ArrayList<>();
+    HashMap<String, Integer> number = new HashMap<>();
+    HashMap<String, Integer> sections = new HashMap<>();
+    HashMap<String, ArrayList<Pair>> map = new HashMap<>();
+    ArrayList<String> courses = new ArrayList<>();
     double MAX_SIZE = 32;
     public static void main(String[] args) throws Exception{
-        new Part2().RUN();
+        Part2 troll = new Part2();
+        troll.init(); //number is filled
+        troll.ALGORITHM();
     }
+
+    public void init() throws Exception{
+        Scanner scan = new Scanner(new File("Students.csv"));
+        while (scan.hasNextLine()){
+            String[] line = scan.nextLine().split(" ");
+            for (int i = 3; i < 11; i++){
+                if (number.containsKey(line[i])) number.put(line[i], number.get(line[i])+1);
+                else number.put(line[i], 1);
+            }
+        }
+        Scanner scan2 = new Scanner(new File("Courses.csv"));
+        while (scan2.hasNextLine()) courses.add(scan2.nextLine());
+        for (String s: courses){
+            System.out.println(s + " " + number.get(s));
+            //Each class is either 1, 2, or 3 sections
+            if (number.get(s) <= 32) sections.put(s, 1);
+            else if (number.get(s) / 2 <= 32 && number.get(s) / 3 > 32) sections.put(s, 2);
+            else sections.put(s, 3);
+        }
+    }
+
+    public void ALGORITHM(){
+        StudentsInput GD = new StudentsInput();
+        GD.ReadStudentInput("Students.csv");
+        students = GD.StudentInfo;
+        for (Student s: students){ //500
+            String[] courses = s.choicesMain;
+            String[] alts = s.choicesAlt;
+            Boolean[] check = new Boolean[8];
+            for (int i = 0; i < 8; i++) check[i] = false;
+            for (String course: courses){ //8
+                ArrayList<Pair> updateSize = map.get(course);
+                if (updateSize != null){
+                    //Pair: section number + # people inside
+                    if (updateSize.size() == 1 && updateSize.get(0).b < number.get(course) / sections.get(course) && !check[updateSize.get(0).a]){
+                        //Add person
+                        check[updateSize.get(0).a] = true; //Section is occupied
+                        updateSize.set(0, new Pair(updateSize.get(0).a, updateSize.get(0).b + 1));
+                    }else if (updateSize.size() == 1){
+                        //Add new one
+                    }else if (updateSize.size() > 1){
+                        boolean done = false;
+                        for (int i = 0; i < updateSize.size(); i++){ //4
+                            Pair p = updateSize.get(i);
+                            if (p.b < number.get(course) / sections.get(course) && !check[p.b]){
+                                //Fill in first spot
+                                check[p.a] = true;
+                                updateSize.set(i, new Pair(p.a, p.b + 1));
+                                done = true;
+                                break;
+                            }
+                        }
+                        if (!done){
+                            //Use alts
+                        }
+                    }
+                }else{
+                    //Create new section
+                    ArrayList<Integer> leftover = new ArrayList<>();
+                    for (int i = 0; i < 8; i++) if (!check[i]) leftover.add(i);
+                }
+            }
+        }
+
+    }
+
     //Population: 500 (125 126 114 135)
     //Courses: 15 17 22 24
     //Size: 25-32
     //Maximum: 125 (including alt) => 4 sections maximum
+
+    /*
     public void RUN() throws Exception{
         Scanner courseS = new Scanner(new File("Courses.csv"));
         while (courseS.hasNextLine()){
@@ -102,4 +170,5 @@ public class Part2{
         }
         return really;
     }
+     */
 }

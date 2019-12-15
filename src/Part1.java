@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 
 public class Part1{
-	public HashMap<String, ArrayList<Student>> list = new HashMap<String, ArrayList<Student>>();
+	public HashMap<String, ArrayList<Student>> list = new HashMap<>();
 	public void adjList(){
 		CourseInput c = new CourseInput();
 		StudentsInput s = new StudentsInput();
