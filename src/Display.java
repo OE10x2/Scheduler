@@ -33,12 +33,29 @@ public class Display extends Application{
     ArrayList<Final> students = new ArrayList<>();
 
     public ArrayList<Final> filterByLastName(String lastname){
+        lastname = lastname.toLowerCase();
         ArrayList<Final> filtered= new ArrayList<Final>();
         for (Final student: students){
+            String LN = student.LN.toLowerCase();
+            boolean check = true;
+            for (int i =0; i< LN.length() && i< lastname.length(); i++){
+                if (lastname.charAt(i) == LN.charAt(i)){
+
+                }else{
+                    check = false;
+                    break;
+                }
+            }
+            if (check){
+                filtered.add(student);
+            }
+            /*
             if (student.FN.toLowerCase().equals(lastname.toLowerCase())){
                 System.out.println(student.FN);
                 filtered.add(student);
             }
+            */
+
         }
         return filtered;
     }
@@ -172,7 +189,8 @@ public class Display extends Application{
             ListView for the list of students
          */
         ListView LV = new ListView(LOL);
-        LV.setPrefSize(1000, 500);
+        LV.setPrefWidth(1000);
+        LV.setMaxHeight(500);
         LV.setTranslateX(183);
         LV.setTranslateY(200);
         root.getChildren().addAll(searchWrapper, LV);
@@ -190,7 +208,8 @@ public class Display extends Application{
             ObservableList<Group> TEMPP = renderStudents(filteredStudents, stage);
 
             ListView tempLV = new ListView(TEMPP);
-            tempLV.setPrefSize(1000, 500);
+            tempLV.setPrefWidth(1000);
+            tempLV.setMaxHeight(500);
             tempLV.setTranslateX(183);
             tempLV.setTranslateY(200);
             root.getChildren().addAll(searchWrapper, tempLV);
