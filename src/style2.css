@@ -3,5 +3,16 @@
 }
 
 #return_button{
-    -fx-font-size: 70px;
+    -fx-font-size: 50px;
+}
+.course {
+    -fx-font-size: 40px;
+}
+#courses_container{
+ -fx-border-color: black;
+    -fx-border-width: 1px;
+}
+
+#main_wrapper{
+    -fx-border-color: black;
 }
