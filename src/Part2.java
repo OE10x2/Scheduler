@@ -44,23 +44,25 @@ public class Part2{
             String[] courses = s.choicesMain;
             String[] alts = s.choicesAlt;
             Boolean[] check = new Boolean[8];
+            String[] actual = new String[8];
             for (int i = 0; i < 8; i++) check[i] = false;
             for (String course: courses){ //8
-                System.out.println(s + " " + course);
                 ArrayList<Pair> updateSize = everything.get(course);
                 if (updateSize != null){
                     updateSize = everything.get(course);
                     //Pair: section number + # people inside
-                    if (updateSize.size() == 1 && updateSize.get(0).b < number.get(course) / sections.get(course) && !check[updateSize.get(0).a]){
+                    if (updateSize.size() == 1 && updateSize.get(0).b < MAX_SIZE && !check[updateSize.get(0).a]){
                         //Add person
                         check[updateSize.get(0).a] = true; //Section is occupied
                         updateSize.set(0, new Pair(updateSize.get(0).a, updateSize.get(0).b + 1));
+                        actual[updateSize.get(0).a] = course;
                     }else if (updateSize.size() == 1){
                         //Add new one
                         for (int i = 0; i < 8; i++){
                             if (!check[i]){
                                 updateSize.add(new Pair(i, 1));
                                 check[i] = true;
+                                actual[i] = course;
                                 break;
                             }
                         }
@@ -68,10 +70,11 @@ public class Part2{
                         boolean done = false;
                         for (int i = 0; i < updateSize.size(); i++){ //4
                             Pair p = updateSize.get(i);
-                            if (p.b < number.get(course) / sections.get(course) && !check[p.a]){
+                            if (p.b < MAX_SIZE && !check[p.a]){
                                 //Fill in first spot
                                 check[p.a] = true;
                                 updateSize.set(i, new Pair(p.a, p.b + 1));
+                                actual[p.a] = course;
                                 done = true;
                                 break;
                             }
@@ -82,9 +85,10 @@ public class Part2{
                             ArrayList<Pair> another = everything.get(first);
                             for (int i = 0; i < another.size(); i++){
                                 Pair p = another.get(i);
-                                if (p.b < number.get(first) / sections.get(first) && !check[p.a]){
+                                if (p.b < MAX_SIZE && !check[p.a]){
                                     check[p.a] = true;
                                     another.set(i, new Pair(p.a, p.b + 1));
+                                    actual[p.a] = course;
                                     done = true;
                                     ERROR++;
                                     break;
@@ -97,31 +101,17 @@ public class Part2{
                             ArrayList<Pair> another = everything.get(first);
                             for (int i = 0; i < another.size(); i++){
                                 Pair p = another.get(i);
-                                if (p.b < number.get(first) / sections.get(first) && !check[p.a]){
+                                if (p.b < MAX_SIZE && !check[p.a]){
                                     check[p.a] = true;
                                     another.set(i, new Pair(p.a, p.b + 1));
+                                    actual[p.a] = course;
                                     done = true;
                                     ERROR += 2;
                                     break;
                                 }
                             }
                         }
-                        if (!done){ //3rd alt
-                            //Use alts
-                            String first = alts[2];
-                            ArrayList<Pair> another = everything.get(first);
-                            for (int i = 0; i < another.size(); i++){
-                                Pair p = another.get(i);
-                                if (p.b < number.get(first) / sections.get(first) && !check[p.a]){
-                                    check[p.a] = true;
-                                    another.set(i, new Pair(p.a, p.b + 1));
-                                    done = true;
-                                    ERROR += 3;
-                                    break;
-                                }
-                            }
-                        }
-                        if (!done) ERROR += 5;
+                        if (!done) ERROR += 3;
                     }
                     everything.put(course, updateSize);
                 }else{
@@ -131,14 +121,18 @@ public class Part2{
                         if (!check[i]){
                             updateSize.add(new Pair(i, 1));
                             check[i] = true;
+                            actual[i] = course;
                             break;
                         }
                     }
                     everything.put(course, updateSize);
                 }
             }
+            System.out.print(s.nameFirst + " " + s.nameLast + " " + s.grade + " ");
+            for (int i = 0; i < 8; i++) System.out.print(actual[i] + " ");
+            System.out.println();
         }
-        return ERROR;
+        return ERROR / courses.size();
     }
 
     //Population: 500 (125 126 114 135)
