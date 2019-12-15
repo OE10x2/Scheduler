@@ -37,11 +37,12 @@ public class Display extends Application{
         ArrayList<Final> filtered= new ArrayList<Final>();
         for (Final student: students){
             String LN = student.LN.toLowerCase();
+            if (LN.length() < lastname.length()){
+                continue;
+            }
             boolean check = true;
             for (int i =0; i< LN.length() && i< lastname.length(); i++){
-                if (lastname.charAt(i) == LN.charAt(i)){
-
-                }else{
+                if (lastname.charAt(i) != LN.charAt(i)){
                     check = false;
                     break;
                 }
