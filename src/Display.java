@@ -3,6 +3,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ public class Display extends Application{
     Scene scene = new Scene(root);
     BorderPane pane = new BorderPane();
     HBox profile = new HBox();
+    VBox useless = new VBox();
     ArrayList<Final> students = new ArrayList<>();
 
     @Override
