@@ -21,10 +21,10 @@ public class Display extends Application{
     }
 
     Group oneRoot = new Group();
-    Scene oneScene = new Scene(oneRoot);
+    Scene oneScene = new Scene(oneRoot, 1366, 768);
 
     Group root = new Group();
-    Scene scene = new Scene(root);
+    Scene scene = new Scene(root, 1366, 768);
     ArrayList<Final> students = new ArrayList<>();
 
     @Override
@@ -55,31 +55,25 @@ public class Display extends Application{
             details.setFont(new Font("Arial", 40));
             details.setTranslateX(1000);
             details.setTranslateY(-50);
-            details.setOnAction(new EventHandler<ActionEvent>(){
-                @Override
-                public void handle(ActionEvent actionEvent){
-                    oneRoot.getChildren().clear();
-                    Text FNT = new Text(student.FN);
-                    FNT.setFont(new Font("Arial", 50));
-                    FNT.setTranslateX(100);
-                    FNT.setTranslateY(50);
-                    oneRoot.getChildren().add(FNT);
-                    stage.setScene(oneScene);
-                    stage.setFullScreen(true);
+            details.setOnAction(e -> {
+                oneRoot.getChildren().clear();
+                Text FNT = new Text(student.FN);
+                FNT.setFont(new Font("Arial", 50));
+                FNT.setTranslateX(100);
+                FNT.setTranslateY(50);
+                oneRoot.getChildren().add(FNT);
+                stage.setScene(oneScene);
+                stage.setMaximized(true);
 
-                    Button goBack = new Button("Return");
-                    goBack.setTranslateX(500);
-                    goBack.setTranslateY(400);
-                    goBack.setFont(new Font("Arial", 100));
-                    goBack.setOnAction(new EventHandler<ActionEvent>(){
-                        @Override
-                        public void handle(ActionEvent actionEvent){
-                            stage.setScene(scene);
-                            stage.setFullScreen(true);
-                        }
-                    });
-                    oneRoot.getChildren().add(goBack);
-                }
+                Button goBack = new Button("Return");
+                goBack.setTranslateX(500);
+                goBack.setTranslateY(400);
+                goBack.setFont(new Font("Arial", 100));
+                goBack.setOnAction(ef -> {
+                    stage.setScene(scene);
+                    stage.setMaximized(true);
+                });
+                oneRoot.getChildren().add(goBack);
             });
             temp.getChildren().addAll(FNS, LNS, GS, details);
             lol.add(temp);
@@ -90,7 +84,7 @@ public class Display extends Application{
         LV.setTranslateY(100);
         root.getChildren().add(LV);
 
-        stage.setFullScreen(true);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
