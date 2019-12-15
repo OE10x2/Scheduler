@@ -16,5 +16,7 @@ public class Part2{
         }
         System.out.println(cnt);
     }
+    //Population: 500
+    //Courses: 15 17 22 24
     //Size: 25-30
 }
