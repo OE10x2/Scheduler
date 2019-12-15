@@ -2,3 +2,7 @@
     -fx-font-size: 40px;
     -fx-font-family: "Segoe UI";
 }
+
+#search_wrapper{
+    -fx-font-size: 30px;
+}

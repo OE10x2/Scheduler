@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -31,20 +32,20 @@ public class Display extends Application{
     Scene scene = new Scene(root, 1366, 768);
     ArrayList<Final> students = new ArrayList<>();
 
-    @Override
-    public void start(Stage stage) throws Exception{
-        scene.getStylesheets().add("style1.css");
-        oneScene.getStylesheets().add("style2.css");
-        Scanner read = new Scanner(new File("results.csv"));
-        while (read.hasNextLine()){
-            String[] line = read.nextLine().split(" ");
-            String[] C = new String[8];
-            for (int i = 0; i < 8; i++) C[i] = line[i + 3];
-            Final current = new Final(line[0], line[1], Integer.parseInt(line[2]), C);
-            students.add(current);
+    public ArrayList<Final> filterByLastName(String lastname){
+        ArrayList<Final> filtered= new ArrayList<Final>();
+        for (Final student: students){
+            if (student.FN.toLowerCase().equals(lastname.toLowerCase())){
+                System.out.println(student.FN);
+                filtered.add(student);
+            }
         }
-        //Main page
+        return filtered;
+    }
+
+    public ObservableList<Group> renderStudents(ArrayList<Final> students, Stage stage){
         ObservableList<Group> lol = FXCollections.observableArrayList();
+        root.getChildren().clear();
         for (int i = 0; i < students.size(); i++){
             Final student = students.get(i);
             Group temp = new Group();
@@ -63,7 +64,9 @@ public class Display extends Application{
                 stage.setMaximized(true);
 
                 VBox wrapper = new VBox();
-                wrapper.setPrefWidth(oneScene.getWidth()-66);
+                wrapper.setPrefWidth(oneScene.getWidth());
+                wrapper.setPrefHeight(oneScene.getHeight());
+
                 wrapper.setId("wrapper");
                 wrapper.setAlignment(Pos.CENTER);
                 wrapper.setSpacing(50);
@@ -132,12 +135,68 @@ public class Display extends Application{
             temp.getChildren().addAll(FNS, LNS, GS, details);
             lol.add(temp);
         }
-        ListView LV = new ListView(lol);
-        LV.setPrefSize(1000, 600);
-        LV.setTranslateX(183);
-        LV.setTranslateY(100);
-        root.getChildren().add(LV);
+        return lol;
+    }
 
+    @Override
+    public void start(Stage stage) throws Exception{
+        scene.getStylesheets().add("style1.css");
+        oneScene.getStylesheets().add("style2.css");
+        Scanner read = new Scanner(new File("results.csv"));
+        while (read.hasNextLine()){
+            String[] line = read.nextLine().split(" ");
+            String[] C = new String[8];
+            for (int i = 0; i < 8; i++) C[i] = line[i + 3];
+            Final current = new Final(line[0], line[1], Integer.parseInt(line[2]), C);
+            students.add(current);
+        }
+        //Main page
+        ObservableList<Group> LOL =renderStudents(students, stage);
+        /*
+           Area to search for each student
+         */
+        Text searchHeader = new Text("Search by last name:");
+        TextField search = new TextField();
+        search.setMaxWidth(scene.getWidth()/2);
+        Button searchButton = new Button("Search");
+
+
+        //Wrapper
+        VBox searchWrapper = new VBox();
+        searchWrapper.setId("search_wrapper");
+        searchWrapper.setPrefWidth(scene.getWidth());
+        searchWrapper.setAlignment(Pos.CENTER);
+        searchWrapper.getChildren().addAll(searchHeader, search, searchButton);
+        searchWrapper.setSpacing(10);
+        /*
+            ListView for the list of students
+         */
+        ListView LV = new ListView(LOL);
+        LV.setPrefSize(1000, 500);
+        LV.setTranslateX(183);
+        LV.setTranslateY(200);
+        root.getChildren().addAll(searchWrapper, LV);
+
+        /*
+        ON SEARCH
+            ArrayList<Final> students = new ArrayList<>();
+
+         */
+        searchButton.setOnAction(e -> {
+
+            root.getChildren().remove(LV);
+            ArrayList<Final> filteredStudents = filterByLastName(search.getText());
+
+            ObservableList<Group> TEMPP = renderStudents(filteredStudents, stage);
+
+            ListView tempLV = new ListView(TEMPP);
+            tempLV.setPrefSize(1000, 500);
+            tempLV.setTranslateX(183);
+            tempLV.setTranslateY(200);
+            root.getChildren().addAll(searchWrapper, tempLV);
+
+
+        });
         stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
