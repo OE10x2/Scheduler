@@ -9,7 +9,8 @@ public class Part2{
     HashMap<String, Integer> sections = new HashMap<>(); // key is course,  int is # sections
     HashMap<String, ArrayList<Pair>> map = new HashMap<>(); // key is course, pair (time slots, # people in course)
     ArrayList<String> courses = new ArrayList<>();
-    double MAX_SIZE = 32;
+    HashMap<String, ArrayList<Pair>> everything = new HashMap<>();
+    double MAX_SIZE = 32, MIN_SIZE = 25;
     public static void main(String[] args) throws Exception{
         Part2 troll = new Part2();
         troll.init(); //number is filled
@@ -29,8 +30,8 @@ public class Part2{
         while (scan2.hasNextLine()) courses.add(scan2.nextLine());
         for (String s: courses){
             //Each class is either 1, 2, or 3 sections
-            if (number.get(s) <= 32) sections.put(s, 1);
-            else if (number.get(s) / 2 <= 32 && number.get(s) / 3 < 25) sections.put(s, 2);
+            if (number.get(s) <= MAX_SIZE) sections.put(s, 1);
+            else if (Math.ceil(number.get(s) / 2.0) <= MAX_SIZE && Math.ceil(number.get(s) / 3.0) < MIN_SIZE) sections.put(s, 2);
             else sections.put(s, 3);
         }
     }
@@ -46,8 +47,8 @@ public class Part2{
             Boolean[] check = new Boolean[8];
             for (int i = 0; i < 8; i++) check[i] = false;
             for (String course: courses){ //8
-                ArrayList<Pair> updateSize = new ArrayList<>();
-                if (map.containsKey(course)){
+                ArrayList<Pair> updateSize = everything.get(course);
+                if (updateSize != null){
                     updateSize = map.get(course);
                     //Pair: section number + # people inside
                     if (updateSize.size() == 1 && updateSize.get(0).b < number.get(course) / sections.get(course) && !check[updateSize.get(0).a]){
@@ -122,14 +123,20 @@ public class Part2{
                         }
                         if (!done) ERROR += 5;
                     }
+                    everything.replace(course, updateSize);
                 }else{
                     //Create new section
+                    updateSize = new ArrayList<>();
                     for (int i = 0; i < 8; i++){
                         if (!check[i]){
                             updateSize.add(new Pair(i + 1, 1));
                             check[i] = true;
                             break;
                         }
+                    }
+                    everything.replace(course, updateSize);
+                    for (Pair i: updateSize){
+                        System.out.println(i.a + " " + i.b);
                     }
                 }
             }
