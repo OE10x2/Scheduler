@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+
 public class Part1{
 	public HashMap<String, ArrayList<Student>> list = new HashMap<String, ArrayList<Student>>();
 	public void adjList(){

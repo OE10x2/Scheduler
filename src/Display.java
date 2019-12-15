@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,7 +28,7 @@ public class Display extends Application{
     @Override
     public void start(Stage stage) throws Exception{
         scene.getStylesheets().add("style1.css");
-
+        Label label = new Label();
         Scanner read = new Scanner(new File("results.csv"));
         while (read.hasNextLine()){
             String[] line = read.nextLine().split(" ");
