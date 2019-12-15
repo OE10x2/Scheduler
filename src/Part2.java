@@ -16,6 +16,5 @@ public class Part2{
         }
         System.out.println(cnt);
     }
-    //Part 1: generate all possible timetables
-    //Part 2: fit all students in; find error value
+    //Size: 25-30
 }

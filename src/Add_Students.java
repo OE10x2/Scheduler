@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Add_Students {
 	
 	// pair is number slots, and number of people currently in each slot
-	//HashMap<String, ArrayList<Pair>> temp = new HashMap<String, ArrayList<Pair>>(); //3, 5, 7, 8
+	HashMap<String, ArrayList<Pair>> temp = new HashMap<String, ArrayList<Pair>>(); //3, 5, 7, 8
 	
 	StudentsInput studentInput = new StudentsInput();
 	
