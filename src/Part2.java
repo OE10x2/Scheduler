@@ -7,7 +7,6 @@ public class Part2{
     ArrayList<Student> students = new ArrayList<>();
     HashMap<String, Integer> number = new HashMap<>(); // key is course, int is # people choose that course
     HashMap<String, Integer> sections = new HashMap<>(); // key is course,  int is # sections
-    HashMap<String, ArrayList<Pair>> map = new HashMap<>(); // key is course, pair (time slots, # people in course)
     ArrayList<String> courses = new ArrayList<>();
     HashMap<String, ArrayList<Pair>> everything = new HashMap<>();
     double MAX_SIZE = 32, MIN_SIZE = 25;
@@ -47,9 +46,10 @@ public class Part2{
             Boolean[] check = new Boolean[8];
             for (int i = 0; i < 8; i++) check[i] = false;
             for (String course: courses){ //8
+                System.out.println(s + " " + course);
                 ArrayList<Pair> updateSize = everything.get(course);
                 if (updateSize != null){
-                    updateSize = map.get(course);
+                    updateSize = everything.get(course);
                     //Pair: section number + # people inside
                     if (updateSize.size() == 1 && updateSize.get(0).b < number.get(course) / sections.get(course) && !check[updateSize.get(0).a]){
                         //Add person
@@ -59,7 +59,7 @@ public class Part2{
                         //Add new one
                         for (int i = 0; i < 8; i++){
                             if (!check[i]){
-                                updateSize.add(new Pair(i + 1, 1));
+                                updateSize.add(new Pair(i, 1));
                                 check[i] = true;
                                 break;
                             }
@@ -79,7 +79,7 @@ public class Part2{
                         if (!done){ //1st alt
                             //Use alts
                             String first = alts[0];
-                            ArrayList<Pair> another = map.get(first);
+                            ArrayList<Pair> another = everything.get(first);
                             for (int i = 0; i < another.size(); i++){
                                 Pair p = another.get(i);
                                 if (p.b < number.get(first) / sections.get(first) && !check[p.a]){
@@ -94,7 +94,7 @@ public class Part2{
                         if (!done){ //2nd alt
                             //Use alts
                             String first = alts[1];
-                            ArrayList<Pair> another = map.get(first);
+                            ArrayList<Pair> another = everything.get(first);
                             for (int i = 0; i < another.size(); i++){
                                 Pair p = another.get(i);
                                 if (p.b < number.get(first) / sections.get(first) && !check[p.a]){
@@ -109,7 +109,7 @@ public class Part2{
                         if (!done){ //3rd alt
                             //Use alts
                             String first = alts[2];
-                            ArrayList<Pair> another = map.get(first);
+                            ArrayList<Pair> another = everything.get(first);
                             for (int i = 0; i < another.size(); i++){
                                 Pair p = another.get(i);
                                 if (p.b < number.get(first) / sections.get(first) && !check[p.a]){
@@ -123,21 +123,18 @@ public class Part2{
                         }
                         if (!done) ERROR += 5;
                     }
-                    everything.replace(course, updateSize);
+                    everything.put(course, updateSize);
                 }else{
                     //Create new section
                     updateSize = new ArrayList<>();
                     for (int i = 0; i < 8; i++){
                         if (!check[i]){
-                            updateSize.add(new Pair(i + 1, 1));
+                            updateSize.add(new Pair(i, 1));
                             check[i] = true;
                             break;
                         }
                     }
-                    everything.replace(course, updateSize);
-                    for (Pair i: updateSize){
-                        System.out.println(i.a + " " + i.b);
-                    }
+                    everything.put(course, updateSize);
                 }
             }
         }
