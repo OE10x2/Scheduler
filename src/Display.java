@@ -1,9 +1,6 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,10 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -95,14 +90,14 @@ public class Display extends Application{
                 semester2.setAlignment(Pos.CENTER);
                 Text sem1Title = new Text("Semester 1");
                 Text sem2Title = new Text("Semester 2");
-                Text course1 = new Text(student.C[0]);
-                Text course2 = new Text(student.C[1]);
-                Text course3 = new Text(student.C[2]);
-                Text course4 = new Text(student.C[3]);
-                Text course5 = new Text(student.C[4]);
-                Text course6 = new Text(student.C[5]);
-                Text course7 = new Text(student.C[6]);
-                Text course8 = new Text(student.C[7]);
+                Text course1 = new Text(student.C[0].equals("null") ? "Spare" : student.C[0]);
+                Text course2 = new Text(student.C[1].equals("null") ? "Spare" : student.C[1]);
+                Text course3 = new Text(student.C[2].equals("null") ? "Spare" : student.C[2]);
+                Text course4 = new Text(student.C[3].equals("null") ? "Spare" : student.C[3]);
+                Text course5 = new Text(student.C[4].equals("null") ? "Spare" : student.C[4]);
+                Text course6 = new Text(student.C[5].equals("null") ? "Spare" : student.C[5]);
+                Text course7 = new Text(student.C[6].equals("null") ? "Spare" : student.C[6]);
+                Text course8 = new Text(student.C[7].equals("null") ? "Spare" : student.C[7]);
 
                 semester1.getChildren().addAll(sem1Title,course1, course2, course3, course4);
                 semester2.getChildren().addAll(sem2Title,course5, course6, course7, course8);
