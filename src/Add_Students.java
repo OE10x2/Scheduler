@@ -72,7 +72,7 @@ public class Add_Students {
 				boolean assigned = false; // tracks if the course has been given to student
 				for (Pair k: coursePair) // goes through the slots for this specific course
 				{
-					if (k.b < 30) 
+					if (k.b < 32) 
 					{
 						k.b += 1; // dont need to track the students, we not storing them. just keep 
 						assigned = true;	  // track of the size of the classes, and if we use alternates increment the score.
@@ -91,7 +91,7 @@ public class Add_Students {
 						boolean assignedAlt = false; // tracks if the course has been given to student
 						for (Pair k: altSlots) // goes through the slots for this specific course
 						{
-							if (k.b < 30)
+							if (k.b < 32)
 							{
 								k.b += 1; // dont need to track the students, we not storing them. just keep 
 								assignedAlt = true; 
