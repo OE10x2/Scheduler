@@ -5,9 +5,9 @@ public class Part2{
     //Input: HashMap of ArrayList of Students
     //Output: Sections
     ArrayList<Student> students = new ArrayList<>();
-    HashMap<String, Integer> number = new HashMap<>();
-    HashMap<String, Integer> sections = new HashMap<>();
-    HashMap<String, ArrayList<Pair>> map = new HashMap<>();
+    HashMap<String, Integer> number = new HashMap<>(); // key is course, int is # people choose that course
+    HashMap<String, Integer> sections = new HashMap<>(); // key is course,  int is # sections
+    HashMap<String, ArrayList<Pair>> map = new HashMap<>(); // key is course, pair (time slots, # people in course)
     ArrayList<String> courses = new ArrayList<>();
     double MAX_SIZE = 32;
     public static void main(String[] args) throws Exception{
