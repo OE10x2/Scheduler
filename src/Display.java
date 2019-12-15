@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -61,15 +62,24 @@ public class Display extends Application{
                 stage.setScene(oneScene);
                 stage.setMaximized(true);
 
+                VBox wrapper = new VBox();
+                wrapper.setPrefWidth(oneScene.getWidth()-66);
+                wrapper.setId("wrapper");
+                wrapper.setAlignment(Pos.CENTER);
+                wrapper.setSpacing(50);
 
                 Text FNT = new Text(student.FN+ " " +student.LN);
+                FNT.setId("name");
                 FNT.getStyleClass().add("details_header");
-                FNT.setTranslateX(100);
-                FNT.setTranslateY(50);
+                //FNT.setTranslateX(480);
+                //FNT.setTranslateY(100);
 
+                wrapper.getChildren().add(FNT);
 
                 VBox semester1 = new VBox();
                 VBox semester2 = new VBox();
+                semester1.setAlignment(Pos.CENTER);
+                semester2.setAlignment(Pos.CENTER);
                 Text sem1Title = new Text("Semester 1");
                 Text sem2Title = new Text("Semester 2");
                 Text course1 = new Text(student.C[0]);
@@ -100,21 +110,23 @@ public class Display extends Application{
                 HBox courseContainer = new HBox();
                 courseContainer.setSpacing(100);
                 courseContainer.setId("courses_container");
-                courseContainer.setTranslateX(400);
-                courseContainer.setTranslateY(200);
+                //courseContainer.setTranslateX(400);
+                //courseContainer.setTranslateY(200);
                 courseContainer.setAlignment(Pos.CENTER);
                 courseContainer.getChildren().addAll(semester1, semester2);
 
 
                 Button goBack = new Button("Return");
                 goBack.setId("return_button");
-                goBack.setTranslateX(530);
-                goBack.setTranslateY(500);
+                //goBack.setTranslateX(530);
+                //goBack.setTranslateY(500);
                 goBack.setOnAction(ef -> {
                     stage.setScene(scene);
                     stage.setMaximized(true);
                 });
-                oneRoot.getChildren().addAll(goBack, courseContainer, FNT);
+                wrapper.getChildren().add(courseContainer);
+                wrapper.getChildren().add(goBack);
+                oneRoot.getChildren().addAll( wrapper);
 
             });
             temp.getChildren().addAll(FNS, LNS, GS, details);
