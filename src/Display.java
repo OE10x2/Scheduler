@@ -1,11 +1,12 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,10 +20,11 @@ public class Display extends Application{
         launch(args);
     }
 
+    Group oneRoot = new Group();
+    Scene oneScene = new Scene(oneRoot);
+
     Group root = new Group();
     Scene scene = new Scene(root);
-    BorderPane pane = new BorderPane();
-    HBox organize = new HBox(100);
     ArrayList<Final> students = new ArrayList<>();
 
     @Override
@@ -37,20 +39,49 @@ public class Display extends Application{
         }
         //Main page
         ObservableList<Group> lol = FXCollections.observableArrayList();
-        for (Final student: students){
+        for (int i = 0; i < students.size(); i++){
+            Final student = students.get(i);
             Group temp = new Group();
             Text FNS = new Text(student.FN);
-            FNS.setFont(new Font("Arial", 50));
+            FNS.setFont(new Font("Arial", 40));
             FNS.setTranslateX(280);
-            temp.getChildren().add(FNS);
             Text LNS = new Text(student.LN);
             LNS.setTranslateX(580);
-            LNS.setFont(new Font("Arial", 50));
-            temp.getChildren().add(LNS);
+            LNS.setFont(new Font("Arial", 40));
             Text GS = new Text(Integer.toString(student.G));
             GS.setTranslateX(880);
-            GS.setFont(new Font("Arial", 50));
-            temp.getChildren().add(GS);
+            GS.setFont(new Font("Arial", 40));
+            Button details = new Button("Details");
+            details.setFont(new Font("Arial", 40));
+            details.setTranslateX(1000);
+            details.setTranslateY(-50);
+            details.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent actionEvent){
+                    oneRoot.getChildren().clear();
+                    Text FNT = new Text(student.FN);
+                    FNT.setFont(new Font("Arial", 50));
+                    FNT.setTranslateX(100);
+                    FNT.setTranslateY(50);
+                    oneRoot.getChildren().add(FNT);
+                    stage.setScene(oneScene);
+                    stage.setFullScreen(true);
+
+                    Button goBack = new Button("Return");
+                    goBack.setTranslateX(500);
+                    goBack.setTranslateY(400);
+                    goBack.setFont(new Font("Arial", 100));
+                    goBack.setOnAction(new EventHandler<ActionEvent>(){
+                        @Override
+                        public void handle(ActionEvent actionEvent){
+                            stage.setScene(scene);
+                            stage.setFullScreen(true);
+                        }
+                    });
+                    oneRoot.getChildren().add(goBack);
+                }
+            });
+            temp.getChildren().addAll(FNS, LNS, GS, details);
             lol.add(temp);
         }
         ListView LV = new ListView(lol);
@@ -58,27 +89,8 @@ public class Display extends Application{
         LV.setTranslateX(183);
         LV.setTranslateY(100);
         root.getChildren().add(LV);
-        /*
-        organize.setTranslateX(280);
-        ListView FNSL = new ListView(FNS);
-        FNSL.setTranslateY(200);
-        FNSL.setPrefSize(800, 600);
-        FNSL.setEditable(true);
-        organize.getChildren().add(FNSL);
-        ListView LNSL = new ListView(LNS);
-        LNSL.setTranslateY(200);
-        LNSL.setPrefSize(800, 600);
-        LNSL.setEditable(true);
-        organize.getChildren().add(LNSL);
-        ListView LNSL = new ListView(LNS);
-        LNSL.setTranslateY(200);
-        LNSL.setPrefSize(800, 600);
-        LNSL.setEditable(true);
-        organize.getChildren().add(LNSL);
 
-         */
-
-        stage.setMaximized(true);
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
